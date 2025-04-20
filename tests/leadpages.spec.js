@@ -60,10 +60,10 @@ test('test', async ({ page }) => {
     const fs = require('fs');
 
     let counter = +fs.readFileSync('counter.txt', 'utf8').trim() || 1;
-
+    
     await page.getByRole('textbox', { name: 'Page Name' }).fill('');
     await page.getByRole('textbox', { name: 'Page Name' }).type(`leadpages-${counter}`, { delay: 200 });
-
+    
     fs.writeFileSync('counter.txt', (counter + 1).toString());
 
     // ================================================
