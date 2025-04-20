@@ -58,12 +58,13 @@ test('test', async ({ page }) => {
     // Step 8: Generate a Unique Page Name
     // ================================================
     const fs = require('fs');
-    let counter = fs.existsSync('counter.txt') ? parseInt(fs.readFileSync('counter.txt', 'utf8')) : 1;
+
+    let counter = +fs.readFileSync('counter.txt', 'utf8').trim() || 1;
 
     await page.getByRole('textbox', { name: 'Page Name' }).fill('');
     await page.getByRole('textbox', { name: 'Page Name' }).type(`leadpages-${counter}`, { delay: 200 });
 
-    fs.writeFileSync('counter.txt', (counter + 1).toString()); // Increment page name counter
+    fs.writeFileSync('counter.txt', (counter + 1).toString());
 
     // ================================================
     // Step 9: Click the Continue Button
